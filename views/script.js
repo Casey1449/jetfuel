@@ -67,13 +67,12 @@ const displayByTimestamp = () => {
   $.getJSON('/urls')
   .then(sortByTimestamp)
   .then(turnUrlsIntoElements)
-  .then(putUrlOnPage)
-  .catch((err) => console.error(err));
+  .then(putUrlOnPage);
 };
 
 const turnUrlsIntoElements = (response) => {
   return response.map((link) => $(`<tr class='link-row'>
-    <td><a href='${link.id}' target='_blank'>${host}/${link.id}</a></td>
+    <td><a href='/urls/${link.shortUrl}' target='_blank'>${host}/${link.shortUrl}</a></td>
     <td>Links to: ${link.longUrl}</td>
     <td>Clicks: ${link.clicks}</td>
     <td>Created: ${new Date(link.timestamp)}</td></tr>`) );
